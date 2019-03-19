@@ -1,6 +1,6 @@
 Summary: Bootloader for EL-based distros that support Xen
 Name: linux-guest-loader
-Version: 2.2.1
+Version: 2.2.2
 Release: 1
 Source: https://code.citrite.net/rest/archive/latest/projects/XS/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
 %define initrd_url https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions
@@ -70,6 +70,10 @@ Linux distros.
 %{pkgdatadir}/*
 
 %changelog
+* Tue May 15 2018 Simon Rowe <simon.rowe@citrix.com> - 2.2.2-1
+- CA-289156: Always give a proper Pygrub error when called
+- Set more standard message, and set message as error message
+
 * Mon Mar 26 2018 Simon Rowe <simon.rowe@citrix.com> - 2.2.1-1
 - CP-27183: Add cpio mapping files for EL6.9 guests
 
