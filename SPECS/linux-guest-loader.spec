@@ -1,7 +1,7 @@
 Summary: Bootloader for EL-based distros that support Xen
 Name: linux-guest-loader
 Version: 2.2.2
-Release: 1
+Release: 1%{dist}
 Source: https://code.citrite.net/rest/archive/latest/projects/XS/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
 %define initrd_url https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions
 Source1: %{initrd_url}/el4.5-initrd-additions.cpio
