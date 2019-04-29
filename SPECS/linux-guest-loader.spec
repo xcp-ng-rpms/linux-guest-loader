@@ -1,29 +1,34 @@
 Summary: Bootloader for EL-based distros that support Xen
 Name: linux-guest-loader
-Version: 2.2.2
+Version: 2.3.1
 Release: 1
-Source: https://code.citrite.net/rest/archive/latest/projects/XS/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
+
+Source0: https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz
+Source1: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.5-initrd-additions.cpio
+Source2: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.6-initrd-additions.cpio
+Source3: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.7-initrd-additions.cpio
+Source4: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.8-initrd-additions.cpio
+Source5: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.0-initrd-additions.cpio
+Source6: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.10-initrd-additions.cpio
+Source7: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.11-initrd-additions.cpio
+Source8: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.1-initrd-additions.cpio
+Source9: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.2-initrd-additions.cpio
+Source10: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.3-initrd-additions.cpio
+Source11: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.4-initrd-additions.cpio
+Source12: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.5-initrd-additions.cpio
+Source13: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.6-initrd-additions.cpio
+Source14: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.7-initrd-additions.cpio
+Source15: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.8-initrd-additions.cpio
+Source16: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.9-initrd-additions.cpio
+Source17: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6.0-initrd-additions.cpio
+Source18: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6.1-initrd-additions.cpio
+Source19: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6-initrd-additions.cpio
+Source20: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/ubuntu11.04-initrd-additions.cpio
+
+
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz) = 6de142564e932fbb5e0e449f5c6bf8fdc9a98b00
+
 %define initrd_url https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions
-Source1: %{initrd_url}/el4.5-initrd-additions.cpio
-Source2: %{initrd_url}/el4.6-initrd-additions.cpio
-Source3: %{initrd_url}/el4.7-initrd-additions.cpio
-Source4: %{initrd_url}/el4.8-initrd-additions.cpio
-Source5: %{initrd_url}/el5.0-initrd-additions.cpio
-Source6: %{initrd_url}/el5.10-initrd-additions.cpio
-Source7: %{initrd_url}/el5.11-initrd-additions.cpio
-Source8: %{initrd_url}/el5.1-initrd-additions.cpio
-Source9: %{initrd_url}/el5.2-initrd-additions.cpio
-Source10: %{initrd_url}/el5.3-initrd-additions.cpio
-Source11: %{initrd_url}/el5.4-initrd-additions.cpio
-Source12: %{initrd_url}/el5.5-initrd-additions.cpio
-Source13: %{initrd_url}/el5.6-initrd-additions.cpio
-Source14: %{initrd_url}/el5.7-initrd-additions.cpio
-Source15: %{initrd_url}/el5.8-initrd-additions.cpio
-Source16: %{initrd_url}/el5.9-initrd-additions.cpio
-Source17: %{initrd_url}/el6.0-initrd-additions.cpio
-Source18: %{initrd_url}/el6.1-initrd-additions.cpio
-Source19: %{initrd_url}/el6-initrd-additions.cpio
-Source20: %{initrd_url}/ubuntu11.04-initrd-additions.cpio
 License: GPL
 BuildArch: noarch
 
@@ -59,6 +64,7 @@ install -m 644 %{_sourcedir}/*-initrd-additions.cpio %{buildroot}%{pkgdatadir}/
 
 
 %package data
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz) = 6de142564e932fbb5e0e449f5c6bf8fdc9a98b00
 Summary: Data files for eliloader
 Group: Applications/System
 
@@ -70,6 +76,12 @@ Linux distros.
 %{pkgdatadir}/*
 
 %changelog
+* Thu Feb 14 2019 Ross Lagerwall <ross.lagerwall@citrix.com> - 2.3.1-1
+- CA-294507: add force/lazy flag to make umount more robust
+
+* Tue Jan 15 2019 Yuan Ren <yuan.ren@citrix.com> - 2.3.0-1
+- CP-28593: Add cpio mapping files for EL6.10 guests.
+
 * Tue May 15 2018 Simon Rowe <simon.rowe@citrix.com> - 2.2.2-1
 - CA-289156: Always give a proper Pygrub error when called
 - Set more standard message, and set message as error message
