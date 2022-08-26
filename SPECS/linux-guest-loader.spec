@@ -1,34 +1,31 @@
+%global package_speccommit 58133bcf34bf1e191519cf2d13e2125abba42b90
+%global package_srccommit v2.3.1
 Summary: Bootloader for EL-based distros that support Xen
 Name: linux-guest-loader
 Version: 2.3.1
-Release: 1%{?dist}
-
-Source0: https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz
-Source1: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.5-initrd-additions.cpio
-Source2: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.6-initrd-additions.cpio
-Source3: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.7-initrd-additions.cpio
-Source4: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el4.8-initrd-additions.cpio
-Source5: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.0-initrd-additions.cpio
-Source6: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.10-initrd-additions.cpio
-Source7: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.11-initrd-additions.cpio
-Source8: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.1-initrd-additions.cpio
-Source9: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.2-initrd-additions.cpio
-Source10: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.3-initrd-additions.cpio
-Source11: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.4-initrd-additions.cpio
-Source12: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.5-initrd-additions.cpio
-Source13: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.6-initrd-additions.cpio
-Source14: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.7-initrd-additions.cpio
-Source15: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.8-initrd-additions.cpio
-Source16: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el5.9-initrd-additions.cpio
-Source17: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6.0-initrd-additions.cpio
-Source18: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6.1-initrd-additions.cpio
-Source19: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/el6-initrd-additions.cpio
-Source20: https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions/ubuntu11.04-initrd-additions.cpio
-
-
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz) = 6de142564e932fbb5e0e449f5c6bf8fdc9a98b00
-
+Release: 1%{?xsrel}%{?dist}
+Source0: linux-guest-loader-2.3.1.tar.gz
 %define initrd_url https://repo.citrite.net/xs-local-contrib/citrix/xenserver/initrd-additions
+Source1: el4.5-initrd-additions.cpio
+Source2: el4.6-initrd-additions.cpio
+Source3: el4.7-initrd-additions.cpio
+Source4: el4.8-initrd-additions.cpio
+Source5: el5.0-initrd-additions.cpio
+Source6: el5.10-initrd-additions.cpio
+Source7: el5.11-initrd-additions.cpio
+Source8: el5.1-initrd-additions.cpio
+Source9: el5.2-initrd-additions.cpio
+Source10: el5.3-initrd-additions.cpio
+Source11: el5.4-initrd-additions.cpio
+Source12: el5.5-initrd-additions.cpio
+Source13: el5.6-initrd-additions.cpio
+Source14: el5.7-initrd-additions.cpio
+Source15: el5.8-initrd-additions.cpio
+Source16: el5.9-initrd-additions.cpio
+Source17: el6.0-initrd-additions.cpio
+Source18: el6.1-initrd-additions.cpio
+Source19: el6-initrd-additions.cpio
+Source20: ubuntu11.04-initrd-additions.cpio
 License: GPL
 BuildArch: noarch
 
@@ -43,12 +40,12 @@ Bootloader for EL-based distros that support Xen.
 %autosetup -p1
 
 %build
-%{__python} setup.py build
+%{__python2} setup.py build
 
 %define pkgdatadir /opt/xensource/packages/files/guest-installer
 
 %install
-%{__python} setup.py install -O1 --skip-build --root %{buildroot} --install-scripts /opt/xensource/libexec
+%{__python2} setup.py install -O1 --skip-build --root %{buildroot} --install-scripts /opt/xensource/libexec
 mkdir -p %{buildroot}/usr/bin
 ln -sf /opt/xensource/libexec/eliloader.py %{buildroot}/usr/bin/eliloader
 
@@ -60,11 +57,10 @@ install -m 644 %{_sourcedir}/*-initrd-additions.cpio %{buildroot}%{pkgdatadir}/
 /opt/xensource/libexec/*
 /usr/bin/eliloader
 %dir %{pkgdatadir}
-%exclude %{python_sitelib}/*-py*.egg-info
+%exclude %{python2_sitelib}/*-py*.egg-info
 
 
 %package data
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XS/repos/linux-guest-loader/archive?at=v2.3.1&format=tar.gz&prefix=linux-guest-loader-2.3.1#/linux-guest-loader-2.3.1.tar.gz) = 6de142564e932fbb5e0e449f5c6bf8fdc9a98b00
 Summary: Data files for eliloader
 Group: Applications/System
 
